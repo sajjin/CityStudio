@@ -1,0 +1,1012 @@
+[
+    {
+        "api_endpoint": "https://data.seattle.gov/resource/3th6-ticf.json",
+        "metric_name": "total GHG emissions in tonnes",
+        "city": "Seattle",
+        "metric_parse_code": "sum(float(d['totalghgemissions']) for d in data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/yg3y-7juh.json?$limit=9999999",
+        "metric_name": "% of unclean business",
+        "city": "New York City",
+        "metric_parse_code": "(1-(len([entry for entry in data if entry['overall_condition'] == 'A'])/len(data)))",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.ny.gov/resource/erjw-j2zx.json",
+        "metric_name": "Annual Energy Efficiency Reports (EER) completed",
+        "city": "New York City",
+        "metric_parse_code": "len([i for i in data if i['year_completed']=='2020'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.calgary.ca/resource/m7gu-3xk5.json?$limit=9999999",
+        "metric_name": "community-wide greenhouse gas emissions over time",
+        "city": "Calgary",
+        "metric_parse_code": "sum([float(d['tonnes_co2e']) for d in data if 'tonnes_co2e' in d.keys()])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/4yue-vjfc.json",
+        "metric_name": "Number of bridges with rating above 5",
+        "city": "New York City",
+        "metric_parse_code": "sum((float(d['current_rating']) > 5) for d in data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "1181",
+        "cov_metric_name": "% of Major Road Network (MRN) rated good or above"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/fc53-9hrv.json?$limit=9999999",
+        "metric_name": "Number of NYC EV Fleet vehciles",
+        "city": "New York City",
+        "metric_parse_code": "len(data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.seattle.gov/resource/76t5-zqzr.json?$limit=9999999",
+        "metric_name": "Number of building permits issued",
+        "city": "Seattle",
+        "metric_parse_code": "len([entry for entry in data if entry['statuscurrent'] == 'Issued'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/uiay-nctu.json?$limit=9999999",
+        "metric_name": "Total kilometers of cycling routes",
+        "city": "New York City",
+        "metric_parse_code": "round(sum(float(entry['length_in_']) for entry in data)*1.60934, 2)",
+        "date_parse_code": "",
+        "cov_dimension_id": "1186",
+        "cov_metric_name": "Kilometer of total bike network"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/qe3p-6ugh.json?$limit=9999999",
+        "metric_name": "Electric vehicles in the citywide fleet",
+        "city": "New York City",
+        "metric_parse_code": "' '.join(entry[\"fy20\"] for entry in data if \"Electric vehicles in the citywide\" in entry[\"performance_indicator\"])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/qe3p-6ugh.json?$limit=9999999",
+        "metric_name": "Citi Bike annual membership",
+        "city": "New York City",
+        "metric_parse_code": "' '.join(entry[\"fy20\"] for entry in data if \"Citi Bike\" in entry[\"performance_indicator\"])+' USD'",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/qe3p-6ugh.json?$limit=9999999",
+        "metric_name": "Total design projects completed early/on time (%)",
+        "city": "New York City",
+        "metric_parse_code": "' '.join(entry[\"fy20\"] for entry in data if \"Total design projects\" in entry[\"performance_indicator\"])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/qe3p-6ugh.json?$limit=9999999",
+        "metric_name": "Total construction projects completed early/on time (%)",
+        "city": "New York City",
+        "metric_parse_code": "' '.join(entry[\"fy20\"] for entry in data if \"Total construction projects\" in entry[\"performance_indicator\"])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://gisdata.seattle.gov/server/rest/services/SDOT/SDOT_Bikes/MapServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json",
+        "metric_name": "Bicycle lane miles installed",
+        "city": "Seattle",
+        "metric_parse_code": "sum(i['attributes']['LENGTH_MILES'] for i in data['features'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/h9gi-nx95.json",
+        "metric_name": "The total number of pedestrian, motorist, bicyclist, and passenger deaths resulting from traffic crashes.",
+        "city":"New York City",
+        "metric_parse_code": "sum(int(i['number_of_persons_killed']) + int(i['number_of_pedestrians_killed']) + int(i['number_of_cyclist_killed']) + int(i['number_of_motorist_killed']) for i in data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.calgary.ca/resource/nhg7-bmw5.json",
+        "metric_name": "% of Paved Lane Km where the Condition is Rated as Good to Very Good",
+        "city": "Calgary",
+        "metric_parse_code": "sum(int(i['asset_condition_rated']) for i in data)/ len(data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/gjkm-nzmg.json",
+        "metric_name": "# Streets maintained with a pavement rating of - Good (%)",
+        "city": "New York City",
+        "metric_parse_code": "len([i['rating_word'] for i in data if i['rating_word'] == 'GOOD'])/ len(data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.calgary.ca/resource/2msm-bgzt.json",
+        "metric_name": "Pedestrian fatalities (# of injuries)",
+        "city": "Calgary",
+        "metric_parse_code": "sum([int(entry['count']) for entry in data if 'count' in entry.keys()])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/fc53-9hrv.json?$limit=9999999",
+        "metric_name": "Number of NYC EV Fleet vehciles",
+        "city": "New York City",
+        "metric_parse_code": "len(data)",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.calgary.ca/resource/m7gu-3xk5.json?$limit=9999999",
+        "metric_name": "Environmental & Safety Management",
+        "city": "Calgary",
+        "metric_parse_code": "sum([float(d['tonnes_co2e']) for d in data if 'tonnes_co2e' in d.keys()])",
+        "date_parse_code": "",
+        "cov_dimension_id": "1548",
+        "cov_metric_name": "Greenhouse gas emissions from City – used Buildings (tonnes CO2e)"
+
+    },
+    {
+        "api_endpoint": "https://data.seattle.gov/resource/3th6-ticf.json?$limit=9999999",
+        "metric_name": "% reduction in building energy emissions",
+        "city": "Seattle",
+        "metric_parse_code": "sum(float(i['totalghgemissions'])for i in data if i['epapropertytype'] == 'K-12 School')",
+        "date_parse_code": "",
+        "cov_dimension_id": "3054",
+        "cov_metric_name": "% reduction of total tonnes of greenhouse gas emmissions from City-owned buildings (since 2007)"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/nsk4-4pvs.json",
+        "metric_name": "New York employment forecast",
+        "city": "New York City",
+        "metric_parse_code": "sum([float(entry['value']) for entry in data if entry['ref_yr'] == '2021'])",
+        "date_parse_code": "2021",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/nsk4-4pvs.json",
+        "metric_name": "New York employment forecast",
+        "city": "New York City",
+        "metric_parse_code": "sum([float(entry['value']) for entry in data if entry['ref_yr'] == '2018'])",
+        "date_parse_code": "2018",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/nsk4-4pvs.json",
+        "metric_name": "New York employment forecast",
+        "city": "New York City",
+        "metric_parse_code": "sum([float(entry['value']) for entry in data if entry['ref_yr'] == '2019'])",
+        "date_parse_code": "2019",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/nsk4-4pvs.json",
+        "metric_name": "New York employment forecast",
+        "city": "New York City",
+        "metric_parse_code": "sum([float(entry['value']) for entry in data if entry['ref_yr'] == '2020'])",
+        "date_parse_code": "2020",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": " https://data.calgary.ca/resource/dpcu-jr23.json?$limit=999999",
+        "metric_name": "Number of Water Main Breaks per 100 Km of Water Distribution Pipe",
+        "city": "Calgary",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "1592",
+        "cov_metric_name": "# of water main breaks"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/bkwf-xfky.json?$limit=999999",
+        "metric_name": "In-City samples meeting water quality standards for coliform bacteria (%)",
+        "city": "New York City",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "2287",
+        "cov_metric_name": "Percentage of Passed Water Quality Tests -  Bacteriological"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/bkwf-xfky.json?$limit=999999",
+        "metric_name": "Samples testing positive for coliform bacteria (%)",
+        "city": "New York City",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "2287",
+        "cov_metric_name": "Percentage of Passed Water Quality Tests -  Bacteriological"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/rv63-53db.json?$limit=999999",
+        "metric_name": "Missed recycling collections (%)",
+        "city": "New York City",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "2480",
+        "cov_metric_name": "# of Missed Garbage and Greenbin Collections"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/uiay-nctu.json?$limit=999999",
+        "metric_name": "Bicycle lane miles installed",
+        "city": "New York City",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "1186",
+        "cov_metric_name": "Kilometers of total bike network"
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/pqdc-ncdn.json?$limit=999999",
+        "metric_name": "City employees/participants trained in Equity and Inclusion",
+        "city": "New York City",
+        "metric_parse_code": "",
+        "date_parse_code": "",
+        "cov_dimension_id": "2038",
+        "cov_metric_name": "Cultural competency training - Number of participants"
+    },
+    {
+        "api_endpoint": "https://ckan0.cf.opendata.inter.prod-toronto.ca/download_resource/570f61cd-0e5b-4bb1-a1c2-0a760e70c687?format=csv",
+        "metric_name": "data['Measure Name']",
+        "city": "Toronto",
+        "metric_parse_code": "data['Result']",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "311 Online site visits (000)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '311 Online site visits (000)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "311 calls (000)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '311 calls (000)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "311 mobile app contacts (000)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '311 mobile app contacts (000)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "311-NYC (text) contacts (000)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '311-NYC (text) contacts (000)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Calls handled in languages other than English (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Calls handled in languages other than English (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average wait time (tier 1 calls) (minutes:seconds)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average wait time (tier 1 calls) (minutes:seconds)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Calls answered in 30 seconds (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Calls answered in 30 seconds (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Call takers time occupied (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Call takers time occupied (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Calls resolved at 311 without transfer to agency for resolution (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Calls resolved at 311 without transfer to agency for resolution (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Complaints about 311 per million calls",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Complaints about 311 per million calls'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Completed requests for interpretation",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Completed requests for interpretation'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "E-mails responded to in 14 days (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'E-mails responded to in 14 days (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Customer satisfaction index",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Customer satisfaction index'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Number of State Central Register consolidated investigations",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Number of State Central Register consolidated investigations'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Abuse and/or neglect reports responded to within 24 hours of receipt from the State Central Register (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Abuse and/or neglect reports responded to within 24 hours of receipt from the State Central Register (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Investigations that found credible evidence of abuse or neglect (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Investigations that found credible evidence of abuse or neglect (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children in complete investigations with repeat investigations within a year (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children in complete investigations with repeat investigations within a year (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Families entering child welfare prevention services",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Families entering child welfare prevention services'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Families entering child welfare specialized teen prevention services",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Families entering child welfare specialized teen prevention services'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average child protective specialist caseload",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average child protective specialist caseload'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Families entering child welfare specialized teen prevention services",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Families entering child welfare specialized teen prevention services'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average child protective specialist caseload",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average child protective specialist caseload'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children receiving child welfare prevention services (daily average)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children receiving child welfare prevention services (daily average)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "All children entering foster care (preliminary)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'All children entering foster care (preliminary)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children placed in foster care in their community",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children placed in foster care in their community'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children in foster care (average)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children in foster care (average)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "– Children in foster kinship homes",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '– Children in foster kinship homes'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "– Children in nonrelative foster boarding homes",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '– Children in nonrelative foster boarding homes'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "– Children in residential care",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == '– Children in residential care'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children who re-enter foster care within a year of discharge to family (%)(preliminary)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children who re-enter foster care within a year of discharge to family (%)(preliminary)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "School Attendance Rate - Children in Foster Care (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'School Attendance Rate - Children in Foster Care (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Total days all children spent in foster care",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Total days all children spent in foster care'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Number of moves in foster care per 1,000 care days",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Number of moves in foster care per 1,000 care days'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children maltreated during family foster care placement per 100,000 care days",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children maltreated during family foster care placement per 100,000 care days'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children discharged to permanency within a year of placement (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children discharged to permanency within a year of placement (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children entering foster care who are placed with relatives (%)(preliminary)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children entering foster care who are placed with relatives (%)(preliminary)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Siblings placed simultaneously in the same foster home (%)(preliminary)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Siblings placed simultaneously in the same foster home (%)(preliminary)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children in care 12-23 months discharged to permanency (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children in care 12-23 months discharged to permanency (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children in care 24 or more months discharged to permanency (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children in care 24 or more months discharged to permanency (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children adopted",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children adopted'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children eligible for adoption (average)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children eligible for adoption (average)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Kinship Guardianship Assistance discharges",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Kinship Guardianship Assistance discharges'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Children returned to parents (reunifications)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Children returned to parents (reunifications)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average child care voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average child care voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average mandated children voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average mandated children voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average other eligible children voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average other eligible children voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average center-based child care voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average center-based child care voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average family child care voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average family child care voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average informal (home-based) child care voucher enrollment",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average informal (home-based) child care voucher enrollment'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Fiscal year spending per child - Center-based child care vouchers",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Fiscal year spending per child - Center-based child care vouchers'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Fiscal year spending per child - Family child care vouchers",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Fiscal year spending per child - Family child care vouchers'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Fiscal year spending per child - Legally exempt (informal child care) vouchers",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Fiscal year spending per child - Legally exempt (informal child care) vouchers'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Abuse and/or neglect reports for children in child care",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Abuse and/or neglect reports for children in child care'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Investigations for children in care that found credible evidence of abuse or neglect (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Investigations for children in care that found credible evidence of abuse or neglect (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Total admissions to detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Total admissions to detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average daily population (ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average daily population (ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Secure detention - ADP",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Secure detention - ADP'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Non-secure detention - ADP",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Non-secure detention - ADP'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average length of stay, detention (days)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average length of stay, detention (days)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Escapes from secure detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Escapes from secure detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Abscond rate in non-secure detention (average per 100 total ADP in non-secure)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Abscond rate in non-secure detention (average per 100 total ADP in non-secure)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth on youth assaults and altercations with injury rate (per 100 total ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth on youth assaults and altercations with injury rate (per 100 total ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth on staff assault w/injury rate (per 100 total ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth on staff assault w/injury rate (per 100 total ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Weapon recovery rate (average per 100 total ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Weapon recovery rate (average per 100 total ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Average daily cost per youth per day, detention ($)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Average daily cost per youth per day, detention ($)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Illegal substance/prescription or OTC medication recovery rate (average per 100 total ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Illegal substance/prescription or OTC medication recovery rate (average per 100 total ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Admissions to Close to Home placement",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Admissions to Close to Home placement'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Number in Close to Home placement",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Number in Close to Home placement'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Absent without consent (AWOC)  rate, Close to Home placement",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Absent without consent (AWOC)  rate, Close to Home placement'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Discharges from Close to Home placement (dispositional order complete)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Discharges from Close to Home placement (dispositional order complete)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Releases from Close to Home placement to aftercare",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Releases from Close to Home placement to aftercare'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth on staff assault with injury rate, Close to Home placement",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth on staff assault with injury rate, Close to Home placement'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth on youth assault with injury rate, Close to Home placement",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth on youth assault with injury rate, Close to Home placement'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Child abuse and/or neglect allegation cases with credible evidence of abuse and/or neglect, rate (average per 100 total ADP), detention",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Child abuse and/or neglect allegation cases with credible evidence of abuse and/or neglect, rate (average per 100 total ADP), detention'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth who received mental health screening or services while in detention (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth who received mental health screening or services while in detention (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Residents seen within 24 hours of sick call report (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Residents seen within 24 hours of sick call report (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "General health care cost per youth per day, detention ($)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'General health care cost per youth per day, detention ($)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Youth admitted to detention with previous admission(s) to detention (%)",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Youth admitted to detention with previous admission(s) to detention (%)'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Collisions involving City vehicles",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Collisions involving City vehicles'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Workplace injuries reported",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Workplace injuries reported'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    },
+    {
+        "api_endpoint": "https://data.cityofnewyork.us/resource/mp3w-h26i.json",
+        "metric_name": "Completed requests for interpretation",
+        "city": "New York City",
+        "metric_parse_code": "max([i['fy19'] for i in data if i['performance_indicator'] == 'Completed requests for interpretation'])",
+        "date_parse_code": "",
+        "cov_dimension_id": "",
+        "cov_metric_name": ""
+    }
+
+]
